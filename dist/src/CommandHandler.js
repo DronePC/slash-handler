@@ -39,7 +39,7 @@ class CommandHandler {
      * @param guild Guild to deploy commands in
      */
     deployCommands(guild) {
-        guild.commands.set(this.commandRegister.array().map(c => c.applicationCommand))
+        guild.commands.set(this.commandRegister.map(c => c.applicationCommand))
             .then(() => {
             console.log(`Deployed commands to guild ${guild.name}`);
             if (this.deployOptions?.setPermsOnDeploy)

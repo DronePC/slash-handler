@@ -59,7 +59,7 @@ export default class CommandHandler {
      * @param commandName Command name to search for
      * @returns A Command instance (if found)
      */
-    getCommand(commandName: string): Command<false> | undefined;
+    getCommand(commandName: string): Command<boolean> | undefined;
     /**
      * Registers a FunctionButton
      * @param button FunctionButton instance to be registered
