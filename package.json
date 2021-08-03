@@ -1,0 +1,27 @@
+{
+  "name": "slash-handler",
+  "version": "0.4.2",
+  "description": "An interaction handler for discord.js@dev",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist", "src", "index.ts", "README.md", "assets"
+  ],
+  "scripts": {
+    "prepublish": "tsc",
+    "prepack": "tsc"
+  },
+  "keywords": [
+    "discord.js",
+    "commands",
+    "handler",
+    "interactions",
+    "bot",
+    "discord"
+  ],
+  "author": "DronePC",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^13.0.0-dev.d310e4f.1627560163"
+  }
+}
