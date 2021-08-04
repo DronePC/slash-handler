@@ -76,10 +76,10 @@ export default class CommandHandler {
      */
     async registerCommandsDir(dir: string) {
         readdirSync(dir).forEach(value => {
-            if (value.endsWith('.ts' || ".js")) {
+            if (value.endsWith('.ts') || value.endsWith('.js')) {
                 const cmd = require(`${dir}/${value}`).default
                 if (cmd instanceof Command) this.registerCommand(cmd)
-            } else this.registerCommandsDir(`${dir}/${value}`)
+            } else this.registerCommandsDir(resolve(`${dir}/${value}`))
         })
     }
 
