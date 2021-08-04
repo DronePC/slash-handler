@@ -5,11 +5,16 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist", "src", "index.ts", "README.md", "assets"
+    "dist",
+    "src",
+    "index.ts",
+    "README.md",
+    "assets"
   ],
   "scripts": {
     "prepublish": "tsc",
-    "prepack": "tsc"
+    "prepack": "tsc",
+    "genDoc": "typedoc index.ts --theme 'node_modules/eledoc/bin/default/' --name 'Slash Handler' --readme './README.md'"
   },
   "keywords": [
     "discord.js",
@@ -22,6 +27,11 @@
   "author": "DronePC",
   "license": "MIT",
   "dependencies": {
-    "discord.js": "^13.0.0-dev.d310e4f.1627560163"
+    "discord.js": "^13.0.0-dev.d310e4f.1627560163",
+    "typedoc-default-themes-dark": "^0.12.10"
+  },
+  "devDependencies": {
+    "eledoc": "^0.2.1",
+    "typedoc": "^0.21.5"
   }
 }
