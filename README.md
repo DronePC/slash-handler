@@ -1,7 +1,7 @@
 SLASH-HANDLER
 -------------
 
-This package is a command handler for discord bots made with discord.js@dev.
+This package is a command handler for discord bots made with discord.js v13.
 
 (For slash commands to work, your bot needs the `applications.commands` OAuth2 scope, which you can enable in the [OAuth2 tab of your application.](https://discord.com/developers/applications)
 
@@ -18,7 +18,7 @@ Currently, the package isn't published on npm, so you have to install it manuall
 
 Grab the latest package version from [the releases tab,](https://github.com/DronePC/slash-handler/releases/tag/0.4.2) and install it in your Node.js project by using the path of your downloaded file. (Note: you need to install [discord.js@dev](https://www.npmjs.com/package/discord.js/v/13.0.0-dev.t1627992462.35fa3b3) first)
 ```shell
-npm i "path/to/slash-handler.tgz"
+npm i discord.js "path/to/slash-handler.tgz"
 ```
 
 
