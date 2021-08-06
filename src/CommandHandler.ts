@@ -32,7 +32,7 @@ export interface CommandHandlerDeployOptions {
  * 
  * All commands and components have to be registered for the handler to recognize them
  */
-export default class CommandHandler {
+export class CommandHandler {
     private commandRegister: Collection<string, Command<true | false>>
     private buttonRegister: Collection<string, FunctionButton>
     private selectMenuRegister: Collection<string, SelectMenuRow>
@@ -129,7 +129,7 @@ export default class CommandHandler {
      * @param button SelectMenuRow instance to be registered
      */
     registerSelectMenu(menu: SelectMenuRow) {
-        this.selectMenuRegister.set(menu.id, menu)
+        this.selectMenuRegister.set(menu.customId, menu)
     }
 
     /**
@@ -186,9 +186,9 @@ export default class CommandHandler {
                 if (menu) try {
                     return await menu.run(interaction)
                 } catch (err) {
-                    console.log(`Select menu ${menu.id} failed while executing!`)
+                    console.log(`Select menu ${menu.customId} failed while executing!`)
                     console.error(err)
-                    return interaction.reply({ content: `Select menu \`${menu.id}\` failed!`, ephemeral: true })
+                    return interaction.reply({ content: `Select menu \`${menu.customId}\` failed!`, ephemeral: true })
                 } else return interaction.reply({ content: `Implementation for select menu \`${interaction.customId}\` is missing!`, ephemeral: true })
             }
         })

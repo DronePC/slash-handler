@@ -14,7 +14,7 @@
   "scripts": {
     "prepublish": "tsc",
     "prepack": "tsc",
-    "genDoc": "typedoc index.ts --theme 'node_modules/eledoc/bin/default/' --name 'Slash Handler' --readme './README.md'"
+    "genDoc": "typedoc index.ts --theme minimal --name \"Slash Handler\" --readme README.md"
   },
   "keywords": [
     "discord.js",

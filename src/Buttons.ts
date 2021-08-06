@@ -1,12 +1,16 @@
 import { ButtonInteraction, EmojiIdentifierResolvable, InteractionButtonOptions, MessageButton, MessageButtonStyleResolvable, LinkButtonOptions as ButtonLinkOptions } from "discord.js"
 
-
 export interface FunctionButtonOptions extends InteractionButtonOptions {
+    /** Defines a button's color and function */
     style: "PRIMARY" | "SECONDARY" | "SUCCESS" | "DANGER"
+    /** Id of the button, up to 100 characters */
     customId: string
+    /** Text that shows up on a button */
     label?: string
+    /** Emoji that shows up on a button */
     emoji?: EmojiIdentifierResolvable
-    run: (interaction: ButtonInteraction) => Promise<void>
+    /** Code to run when the button is pressed */
+    run: (interaction: ButtonInteraction) => Promise<void> | void
 }
 
 export interface FunctionButtonOptionsLabel extends FunctionButtonOptions {
@@ -18,8 +22,11 @@ export interface FunctionButtonOptionsEmoji extends FunctionButtonOptions {
 }
 
 export interface DisabledButtonOptions {
+    /** Defines a button's color and function */
     style: MessageButtonStyleResolvable
+    /** Text that shows up on a button */
     label?: string
+    /** Emoji that shows up on a button */
     emoji?: EmojiIdentifierResolvable
 }
 
@@ -32,8 +39,11 @@ export interface DisabledButtonOptionsEmoji extends DisabledButtonOptions {
 }
 
 export interface LinkButtonOptions {
+    /** URL of a link button. */
     url: string
+    /** Text that shows up on a button */
     label?: string
+    /** Emoji that shows up on a button */
     emoji?: EmojiIdentifierResolvable
 }
 
@@ -55,11 +65,11 @@ export interface Button {
     emoji?: EmojiIdentifierResolvable
     /** Id of the button, up to 100 characters */
     customId?: string
-    /** URL of a button. Can only be used with a LINK style button, and cannot be combined with an Id */
+    /** URL of a link button. */
     url?: string
     /** If set to true, the button will not be clickable */
     disabled?: boolean
-    /** Gets the message components to be used with messages */
+    /** Gets the message component to be used in messages */
     get messageComponent(): MessageButton
 }
 
@@ -69,7 +79,8 @@ export class FunctionButton implements Button {
     label?: string
     emoji?: EmojiIdentifierResolvable
     customId: string
-    private execute: (interaction: ButtonInteraction) => Promise<void>
+    /** Internal function code execution variable */
+    private execute: (interaction: ButtonInteraction) => Promise<void> | void
     
     /** Button that executes code when clicked */
     constructor(options: FunctionButtonOptionsLabel | FunctionButtonOptionsEmoji) {
@@ -81,12 +92,11 @@ export class FunctionButton implements Button {
     }
 
     /**
-     * Runs code on click
-     * @param interaction Matching ButtonInteraction
-     * @private Don't use this unless you're not using a CommandHandler
+     * Runs code on button press, used by CommandHandlers
+     * @private
      */
     async run(interaction: ButtonInteraction) {
-        try {this.execute(interaction)} 
+        try {await this.execute(interaction)} 
         catch (e) {console.error(e)}
     }
 

@@ -4,12 +4,15 @@ import { LimitedArray5 } from './Command'
 
 /** Common methods between different ActionRow components */
 export interface ActionRow {
+    /** Gets the message component to be used in messages */
     readonly messageComponent: MessageActionRow,
-    readonly type: string
+    /** Returns the type of ActionRow */
+    readonly type: "ButtonRow" | "SelectMenuRow"
 }
 
 /** ActionRow component containing Buttons */
 export class ButtonRow implements ActionRow {
+    /** Array of Buttons belonging to the ButtonRow */
     private components: LimitedArray5<Button>
 
     /**
@@ -19,28 +22,18 @@ export class ButtonRow implements ActionRow {
     constructor(components: LimitedArray5<Button>) {
         this.components = components
     }
-
-    /** 
-     * Gets the message components to be used with messages
-     * @returns A MessageActionRow with MessageButtons
-     */
+    
     get messageComponent() {
         return new MessageActionRow({ components: this.components.concat().filter((b): b is Button => {
             return typeof b !== "undefined"
         }).map(b => b.messageComponent)})
     }
 
-    /**
-     * Returns the type of ActionRow
-     * @private Intended for in-module use
-     */
-    get type() {
+    get type(): "ButtonRow" {
         return "ButtonRow"
     }
 
-    /**
-     * Returns a list of all FunctionButtons present in the ButtonRow, if any
-     */
+    /** Returns a list of all FunctionButtons present in the ButtonRow, if any */
     get functionButtons() {
         return this.components.filter((b): b is FunctionButton => {
             return b instanceof FunctionButton
@@ -61,19 +54,20 @@ export interface SelectMenuRowOptions extends MessageSelectMenuOptions {
     minValues?: number
     /** Maximum amount of values that can be selected */
     maxValues?: number
-    /** Asynchronous code to run when an option (or several) is selected */
-    run: (interaction: SelectMenuInteraction) => Promise<void>
+    /** Code to run when an option (or several) is selected */
+    run: (interaction: SelectMenuInteraction) => Promise<void> | void
 }
 
 /** ActionRow component containing a SelectMenu */
-export class SelectMenuRow implements ActionRow {
-    private customId: string
-    private placeholder?: string
-    private options: MessageSelectOptionData[]
-    private disabled?: boolean
-    private minValues?: number
-    private maxValues?: number
-    private execute: (interaction: SelectMenuInteraction) => Promise<void>
+export class SelectMenuRow implements ActionRow, Omit<SelectMenuRowOptions, "run" | "type"> {
+    customId: string
+    placeholder?: string
+    options: MessageSelectOptionData[]
+    disabled?: boolean
+    minValues?: number
+    maxValues?: number
+    /** Internal function code execution variable */
+    private execute: (interaction: SelectMenuInteraction) => Promise<void> | void
 
     /** ActionRow component containing a SelectMenu */
     constructor(options: SelectMenuRowOptions) {
@@ -87,24 +81,14 @@ export class SelectMenuRow implements ActionRow {
     }
 
     /**
-     * Runs code on selection
-     * @param interaction Matching SelectMenuInteraction
-     * @private Don't use this unless you're not using a CommandHandler
+     * Runs code on option selection, used by CommandHandlers
+     * @private
      */
     async run(interaction: SelectMenuInteraction) {
-        try {this.execute(interaction)}
+        try {await this.execute(interaction)}
         catch (e) {console.error(e)}
     }
 
-    /** Id of the SelectMenu */
-    get id() {
-        return this.customId
-    }
-
-    /** 
-     * Gets the message components to be used with messages
-     * @returns A MessageActionRow with a MessageSelectMenu
-     */
     get messageComponent() {
         return new MessageActionRow({ components: [new MessageSelectMenu({
             customId: this.customId,
@@ -116,11 +100,7 @@ export class SelectMenuRow implements ActionRow {
         })] })
     }
 
-    /**
-     * Returns the type of ActionRow
-     * @private Intended for in-module use
-     */
-    get type() {
+    get type(): "SelectMenuRow" {
         return "SelectMenuRow"
     }
 }

@@ -1,7 +1,9 @@
 import { ApplicationCommandData, ApplicationCommandOptionData, ApplicationCommandPermissionData, CommandInteraction } from "discord.js"
 import { ActionRow } from "./ActionRow"
 
+/** Read-only array with a maximum length of 25 entries */
 export type LimitedArray25<T> = readonly [T, T?, T?, T?, T?, T?, T?, T?, T?, T?, T?, T?, T?, T?, T?, T?, T?, T?, T?, T?, T? ,T?, T?, T?, T?]
+/** Read-only array with a maximum length of 5 entries */
 export type LimitedArray5<T>  = readonly [T, T?, T?, T?, T?]
 
 export interface CommandOptions<InGroup extends boolean> {
@@ -19,13 +21,13 @@ export interface CommandOptions<InGroup extends boolean> {
     defaultPermission?: InGroup extends false ? boolean : undefined
     /** Command components (ButtonRows or SelectMenuRows) */
     components?: LimitedArray5<ActionRow>
-    /** Asynchronous code to run when receiving a CommandInteraction */
-    run: (interaction: CommandInteraction) => Promise<void>
+    /** Code to run when the slash command is used */
+    run: (interaction: CommandInteraction) => Promise<void> | void
 }
 
 export interface CommandGroupOptions<InGroup extends boolean> extends Omit<CommandOptions<InGroup>, "run" | "options"> {
-    /** Asynchronous code to run when receiving a CommandInteraction */
-    run?: (interaction: CommandInteraction) => Promise<void>
+    /** Code to run when the slash/sub command is used */
+    run?: (interaction: CommandInteraction) => Promise<void> | void
     /** Group of sub-commands and sub-command groups. Nested CommandGroups cannot hold more CommandGroups */
     group: InGroup extends false ? LimitedArray25<CommandGroup<true> | Command<true>> : LimitedArray25<Command<true>>
 }
@@ -50,14 +52,13 @@ export class Command<InGroup extends boolean = false> {
     permissions?: InGroup extends false ? ApplicationCommandPermissionData[] : undefined
     /** Components of the command */
     private components?: LimitedArray5<ActionRow>
-    protected execute: (interaction: CommandInteraction) => Promise<void>
+    /** Internal command code execution variable */
+    protected execute: (interaction: CommandInteraction) => Promise<void> | void
 
     /**
-     * Represents a slash command with executable code
+     * Represents a slash command with executable code, can also represent a sub-command to a CommandGroup
      * 
      * Can hold other components (buttons, select menus)
-     * 
-     * Has to be registered to a CommandHandler to function properly
      */
     constructor(options: CommandOptions<InGroup>) {
         this.name = options.name.toLowerCase()
@@ -88,7 +89,7 @@ export class Command<InGroup extends boolean = false> {
         return this.components?.concat().filter((c): c is ActionRow => {return c !== undefined}) || []
     }
 
-    /** Gets the application command data to be deployed as slash commands */
+    /** Gets the application command data to be deployed as a slash command */
     get applicationCommand(): ApplicationCommandData {
         return {
             name: this.name,
@@ -99,9 +100,8 @@ export class Command<InGroup extends boolean = false> {
     }
 
     /**
-     * Runs the command
-     * @param interaction Matching CommandInteraction
-     * @private Don't use this unless you're not using a CommandHandler
+     * Runs the command, used by CommandHandlers
+     * @private
      */
     async run(interaction: CommandInteraction) {
         try {this.execute(interaction)} 
@@ -109,9 +109,9 @@ export class Command<InGroup extends boolean = false> {
     }
 }
 
-/** Represents a slash command with sub-commands, or a sub-command group, can run code */
+/** Represents a slash command with sub-commands, or a nested sub-command group, can run code */
 export class CommandGroup<InGroup extends boolean = false> extends Command {
-    /** Group of sub-commands and sub-command groups. Nested CommandGroups cannot hold more CommandGroups */
+    /** Group of sub-commands and sub-command groups. Command groups can only be nested once */
     private group: InGroup extends false ? LimitedArray25<CommandGroup<true> | Command<true>> : LimitedArray25<Command<true>>
 
     /** Represents a slash command with sub-commands, or a sub-command group, can run code */
@@ -167,8 +167,7 @@ export class CommandGroup<InGroup extends boolean = false> extends Command {
 
     /**
      * Runs the CommandGroup code, code is ran before nested commands
-     * @param interaction Matching CommandInteraction
-     * @private Don't use this unless you're not using a CommandHandler
+     * @private
      */
     override async run(interaction: CommandInteraction) {
         try {
