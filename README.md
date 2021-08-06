@@ -16,10 +16,11 @@ It includes support for:
 
 Currently, the package isn't published on npm, so you have to install it manually.
 
-Grab the latest package version from [the releases tab,](https://github.com/DronePC/slash-handler/releases/tag/0.4.2) and install it in your Node.js project by using the path of your downloaded file. (Note: you need to install [discord.js@dev](https://www.npmjs.com/package/discord.js/v/13.0.0-dev.t1627992462.35fa3b3) first)
+Grab the latest package version from [the releases tab,](https://github.com/DronePC/slash-handler/releases) and install it in your Node.js project by using the path of your downloaded file.
 ```shell
-npm i discord.js "path/to/slash-handler.tgz"
+npm i discord.js "path/to/slash-handler-0.4.x.tgz"
 ```
+*(Note: you can omit `discord.js` if you already have it installed.)*
 
 
 ### Basic command handling
