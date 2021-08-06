@@ -77,11 +77,11 @@ const { CommandHandler, Command } = require('slash-handler')
 
 After running the bot, you may notice that the commands don't show up in your server. This is because they aren't deployed, to do so you can send a message command (defaults to `!deploy`) in the server you want the commands in.
 
-![Deploying example](./assets/deploy-example.png)
+![Deploying example](./assets/images/deploy-example.png)
 
 Now your command should appear in the slash command picker for that server.
 
-![Command picker](./assets/command-picker-example.png)
-![Ping command response](./assets/ping-command-example.png)
+![Command picker](./assets/images/command-picker-example.png)
+![Ping command response](./assets/images/ping-command-example.png)
 
 Congratulations! Now you can make basic commands with the command handler.

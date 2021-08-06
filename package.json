@@ -14,7 +14,8 @@
   "scripts": {
     "prepublish": "tsc",
     "prepack": "tsc",
-    "genDoc": "typedoc index.ts --theme minimal --name \"Slash Handler\" --readme README.md"
+    "genDoc": "typedoc index.ts --theme minimal --name \"Slash Handler\" --readme README.md",
+    "postgenDoc": "ts-node ./assets/move_images.ts"
   },
   "keywords": [
     "discord.js",
