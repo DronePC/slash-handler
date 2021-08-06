@@ -175,8 +175,10 @@ export class CommandGroup<InGroup extends boolean = false> extends Command {
             this.execute?.(interaction)
             if (interaction.options.getSubcommandGroup(false) === this.name) {
                 this.group.find(g => g?.name === interaction.options.getSubcommand(false))?.run(interaction)
-            } else {
+            } else if (this.group.find(g => g?.name === interaction.options.getSubcommandGroup(false))) {
                 this.group.find(g => g?.name === interaction.options.getSubcommandGroup(false))?.run(interaction)
+            } else {
+                this.group.find(g => g?.name === interaction.options.getSubcommand(false))?.run(interaction)
             }
         } catch (e) {console.error(e)}
     }
