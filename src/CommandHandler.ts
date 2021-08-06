@@ -155,7 +155,7 @@ export default class CommandHandler {
     private listen(client: Client) {
         client.on('messageCreate', (message) => {
             if (!this.deployOptions) return
-            if (message.guild && (message.author.id === this.deployOptions.allowedUserIds || this.deployOptions.allowedUserIds?.includes(message.author.id)) && message.content === this.deployOptions.deployCommand) {
+            if (message.guild && (message.author.id === this.deployOptions.allowedUserIds || this.deployOptions.allowedUserIds?.includes(message.author.id as `${bigint}`)) && message.content === this.deployOptions.deployCommand) {
                 this.deployCommands(message.guild)
                 message.reply({ content: "Commands deployed!" })
             }

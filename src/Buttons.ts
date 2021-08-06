@@ -1,29 +1,7 @@
-import { ButtonInteraction, EmojiIdentifierResolvable, MessageButton, MessageButtonOptions, MessageButtonStyleResolvable } from "discord.js"
+import { ButtonInteraction, EmojiIdentifierResolvable, InteractionButtonOptions, MessageButton, MessageButtonStyleResolvable, LinkButtonOptions as ButtonLinkOptions } from "discord.js"
 
-export interface ButtonOptions extends MessageButtonOptions {
-    /** Defines a button's color and function */
-    style: MessageButtonStyleResolvable
-    /** Text that shows up on a button */
-    label?: string
-    /** Emoji that shows up on a button */
-    emoji?: EmojiIdentifierResolvable
-    /** Id of the button, up to 100 characters */
-    customId?: string
-    /** URL of a button. Can only be used with a LINK style button, and cannot be combined with an Id */
-    url?: string
-    /** If set to true, the button will not be clickable */
-    disabled?: boolean
-}
 
-export interface ButtonOptionsLabel extends ButtonOptions {
-    label: string
-}
-
-export interface ButtonOptionsEmoji extends ButtonOptions {
-    emoji: EmojiIdentifierResolvable
-}
-
-export interface FunctionButtonOptions extends ButtonOptions {
+export interface FunctionButtonOptions extends InteractionButtonOptions {
     style: "PRIMARY" | "SECONDARY" | "SUCCESS" | "DANGER"
     customId: string
     label?: string
@@ -39,7 +17,7 @@ export interface FunctionButtonOptionsEmoji extends FunctionButtonOptions {
     emoji: EmojiIdentifierResolvable
 }
 
-export interface DisabledButtonOptions extends ButtonOptions {
+export interface DisabledButtonOptions {
     style: MessageButtonStyleResolvable
     label?: string
     emoji?: EmojiIdentifierResolvable
@@ -53,7 +31,7 @@ export interface DisabledButtonOptionsEmoji extends DisabledButtonOptions {
     emoji: EmojiIdentifierResolvable
 }
 
-export interface LinkButtonOptions extends ButtonOptions {
+export interface LinkButtonOptions {
     url: string
     label?: string
     emoji?: EmojiIdentifierResolvable
@@ -67,46 +45,38 @@ export interface LinkButtonOptionsEmoji extends LinkButtonOptions {
     emoji: EmojiIdentifierResolvable
 }
 
-/**
- * Base button component class
- * @private Use the extended functionality button classes
- */
-export class Button implements ButtonOptions {
+/** Common methods between different Button components */
+export interface Button {
+    /** Defines a button's color and function */
     style: MessageButtonStyleResolvable
-    customId?: string
-    disabled?: boolean
-    emoji?: EmojiIdentifierResolvable
+    /** Text that shows up on a button */
     label?: string
+    /** Emoji that shows up on a button */
+    emoji?: EmojiIdentifierResolvable
+    /** Id of the button, up to 100 characters */
+    customId?: string
+    /** URL of a button. Can only be used with a LINK style button, and cannot be combined with an Id */
     url?: string
-
-    constructor(options: ButtonOptionsLabel | ButtonOptionsEmoji) {
-        this.style = options.style
-        this.customId = options.customId?.toLowerCase()
-        this.disabled = options.disabled
-        this.emoji = options.emoji
-        this.label = options.label
-        this.url = options.url
-    }
-
-    /** 
-     * Gets the message components to be used with messages
-     * @returns A MessageButton
-     */
-    get messageComponent(): MessageButton {
-        return new MessageButton(this)
-    }
+    /** If set to true, the button will not be clickable */
+    disabled?: boolean
+    /** Gets the message components to be used with messages */
+    get messageComponent(): MessageButton
 }
 
 /** Button that executes code when clicked */
-export class FunctionButton extends Button {
-    override customId: string
+export class FunctionButton implements Button {
+    style: "PRIMARY" | "SECONDARY" | "SUCCESS" | "DANGER"
+    label?: string
+    emoji?: EmojiIdentifierResolvable
+    customId: string
     private execute: (interaction: ButtonInteraction) => Promise<void>
     
     /** Button that executes code when clicked */
     constructor(options: FunctionButtonOptionsLabel | FunctionButtonOptionsEmoji) {
-        super(options)
+        this.style = options.style
         this.customId = options.customId.toLowerCase()
         this.label = options.label
+        this.emoji = options.emoji
         this.execute = options.run
     }
 
@@ -119,25 +89,49 @@ export class FunctionButton extends Button {
         try {this.execute(interaction)} 
         catch (e) {console.error(e)}
     }
+
+    get messageComponent() {
+        return new MessageButton(this)
+    }
 }
 
 /** Button that cannot be clicked */
-export class DisabledButton extends Button {
+export class DisabledButton implements Button {
+    style: MessageButtonStyleResolvable
+    disabled: boolean
+    label?: string
+    emoji?: EmojiIdentifierResolvable
+    customId?: string
+    url?: string
+
     /** Button that cannot be clicked */
     constructor(options: DisabledButtonOptionsLabel | DisabledButtonOptionsEmoji) {
-        super(options)
+        this.style = options.style
         this.disabled = true
         if (this.style === "LINK") this.url = "https://example.com"; else this.customId = "_"
+    }
+
+    get messageComponent() {
+        return new MessageButton(this as ButtonLinkOptions | InteractionButtonOptions)
     }
 }
 
 /** Button that leads to a URL when clicked */
-export class LinkButton extends Button {
-    override url: string
+export class LinkButton implements Button {
+    style: "LINK"
+    url: string
+    label?: string
+    emoji?: EmojiIdentifierResolvable
 
     /** Button that leads to a URL when clicked */
     constructor(options: LinkButtonOptionsLabel | LinkButtonOptionsEmoji) {
-        super({ style: "LINK", label: options.label, emoji: options.emoji || "" })
+        this.style = "LINK"
         this.url = options.url
+        this.label = options.label
+        this.emoji = options.emoji
+    }
+
+    get messageComponent() {
+        return new MessageButton(this)
     }
 }

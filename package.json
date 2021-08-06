@@ -1,7 +1,7 @@
 {
   "name": "slash-handler",
-  "version": "0.4.3",
-  "description": "A simple slash command handler for discord.js@dev",
+  "version": "0.4.4",
+  "description": "A simple slash command handler for discord.js v13",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
