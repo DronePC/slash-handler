@@ -2822,7 +2822,6 @@ img {
 			<h3>Implements</h3>
 			<ul class="tsd-hierarchy">
 				<li><a href="../interfaces/ActionRow.html" class="tsd-signature-type" data-tsd-kind="Interface">ActionRow</a></li>
-				<li><span class="tsd-signature-type">Omit</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/SelectMenuRowOptions.html" class="tsd-signature-type" data-tsd-kind="Interface">SelectMenuRowOptions</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">&quot;run&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;type&quot;</span><span class="tsd-signature-symbol">&gt;</span></li>
 			</ul>
 		</section>
 		<section class="tsd-panel-group tsd-index-group">
@@ -2875,7 +2874,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/74a49e4/src/ActionRow.ts#L73">src/ActionRow.ts:73</a></li>
+								<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/63ee1b2/src/ActionRow.ts#L79">src/ActionRow.ts:79</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2901,22 +2900,30 @@ img {
 				<h3>custom<wbr>Id</h3>
 				<div class="tsd-signature tsd-kind-icon">custom<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
-					<p>Implementation of Omit.customId</p>
 					<ul>
-						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/74a49e4/src/ActionRow.ts#L63">src/ActionRow.ts:63</a></li>
+						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/63ee1b2/src/ActionRow.ts#L64">src/ActionRow.ts:64</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Id of the SelectMenu, up to 100 characters</p>
+					</div>
+				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="disabled" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagOptional">Optional</span> disabled</h3>
 				<div class="tsd-signature tsd-kind-icon">disabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 				<aside class="tsd-sources">
-					<p>Implementation of Omit.disabled</p>
 					<ul>
-						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/74a49e4/src/ActionRow.ts#L66">src/ActionRow.ts:66</a></li>
+						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/63ee1b2/src/ActionRow.ts#L70">src/ActionRow.ts:70</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>If true, no options will be selectable</p>
+					</div>
+				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 				<a name="execute" class="tsd-anchor"></a>
@@ -2924,7 +2931,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">execute<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>interaction<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">SelectMenuInteraction</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/74a49e4/src/ActionRow.ts#L70">src/ActionRow.ts:70</a></li>
+						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/63ee1b2/src/ActionRow.ts#L76">src/ActionRow.ts:76</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2964,44 +2971,60 @@ img {
 				<h3><span class="tsd-flag ts-flagOptional">Optional</span> max<wbr>Values</h3>
 				<div class="tsd-signature tsd-kind-icon">max<wbr>Values<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
-					<p>Implementation of Omit.maxValues</p>
 					<ul>
-						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/74a49e4/src/ActionRow.ts#L68">src/ActionRow.ts:68</a></li>
+						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/63ee1b2/src/ActionRow.ts#L74">src/ActionRow.ts:74</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Maximum amount of values that can be selected</p>
+					</div>
+				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="minValues" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagOptional">Optional</span> min<wbr>Values</h3>
 				<div class="tsd-signature tsd-kind-icon">min<wbr>Values<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 				<aside class="tsd-sources">
-					<p>Implementation of Omit.minValues</p>
 					<ul>
-						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/74a49e4/src/ActionRow.ts#L67">src/ActionRow.ts:67</a></li>
+						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/63ee1b2/src/ActionRow.ts#L72">src/ActionRow.ts:72</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Minimum amount of options to be selected</p>
+					</div>
+				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="options" class="tsd-anchor"></a>
 				<h3>options</h3>
 				<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">MessageSelectOptionData</span><span class="tsd-signature-symbol">[]</span></div>
 				<aside class="tsd-sources">
-					<p>Implementation of Omit.options</p>
 					<ul>
-						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/74a49e4/src/ActionRow.ts#L65">src/ActionRow.ts:65</a></li>
+						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/63ee1b2/src/ActionRow.ts#L68">src/ActionRow.ts:68</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>List of selectable options for the SelectMenu</p>
+					</div>
+				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="placeholder" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagOptional">Optional</span> placeholder</h3>
 				<div class="tsd-signature tsd-kind-icon">placeholder<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
-					<p>Implementation of Omit.placeholder</p>
 					<ul>
-						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/74a49e4/src/ActionRow.ts#L64">src/ActionRow.ts:64</a></li>
+						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/63ee1b2/src/ActionRow.ts#L66">src/ActionRow.ts:66</a></li>
 					</ul>
 				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Placeholder text to show when no option is selected</p>
+					</div>
+				</div>
 			</section>
 		</section>
 		<section class="tsd-panel-group tsd-member-group ">
@@ -3017,7 +3040,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Implementation of <a href="../interfaces/ActionRow.html">ActionRow</a>.<a href="../interfaces/ActionRow.html#messageComponent">messageComponent</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/74a49e4/src/ActionRow.ts#L92">src/ActionRow.ts:92</a></li>
+								<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/63ee1b2/src/ActionRow.ts#L98">src/ActionRow.ts:98</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3040,7 +3063,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Implementation of <a href="../interfaces/ActionRow.html">ActionRow</a>.<a href="../interfaces/ActionRow.html#type">type</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/74a49e4/src/ActionRow.ts#L103">src/ActionRow.ts:103</a></li>
+								<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/63ee1b2/src/ActionRow.ts#L109">src/ActionRow.ts:109</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3065,7 +3088,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/74a49e4/src/ActionRow.ts#L87">src/ActionRow.ts:87</a></li>
+								<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/63ee1b2/src/ActionRow.ts#L93">src/ActionRow.ts:93</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">

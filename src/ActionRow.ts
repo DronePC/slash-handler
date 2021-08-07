@@ -46,7 +46,7 @@ export interface SelectMenuRowOptions extends MessageSelectMenuOptions {
     customId: string;
     /** Placeholder text to show when no option is selected */
     placeholder?: string
-    /** Selectable options for the SelectMenu */
+    /** List of selectable options for the SelectMenu */
     options: MessageSelectOptionData[]
     /** If true, no options will be selectable */
     disabled?: boolean
@@ -59,12 +59,18 @@ export interface SelectMenuRowOptions extends MessageSelectMenuOptions {
 }
 
 /** ActionRow component containing a SelectMenu */
-export class SelectMenuRow implements ActionRow, Omit<SelectMenuRowOptions, "run" | "type"> {
+export class SelectMenuRow implements ActionRow {
+    /** Id of the SelectMenu, up to 100 characters */
     customId: string
+    /** Placeholder text to show when no option is selected */
     placeholder?: string
+    /** List of selectable options for the SelectMenu */
     options: MessageSelectOptionData[]
+    /** If true, no options will be selectable */
     disabled?: boolean
+    /** Minimum amount of options to be selected */
     minValues?: number
+    /** Maximum amount of values that can be selected */
     maxValues?: number
     /** Internal function code execution variable */
     private execute: (interaction: SelectMenuInteraction) => Promise<void> | void

@@ -6,7 +6,7 @@ import { resolve } from 'path'
 import { ButtonRow, SelectMenuRow } from "./ActionRow"
 
 export interface CommandHandlerOptions {
-    /** Client instance for interaction events */
+    /** Client for listening to interaction events */
     client: Client
     /** Options for deploying commands in a guild */
     deployOptions?: CommandHandlerDeployOptions
@@ -33,10 +33,15 @@ export interface CommandHandlerDeployOptions {
  * All commands and components have to be registered for the handler to recognize them
  */
 export class CommandHandler {
+    /** Collection mapping all registered commands */
     private commandRegister: Collection<string, Command<true | false>>
+    /** Collection mapping all registered function button */
     private buttonRegister: Collection<string, FunctionButton>
+    /** Collection mapping all registered select menus */
     private selectMenuRegister: Collection<string, SelectMenuRow>
+    /** Client for listening to interaction events */
     private client: Client
+    /** Options for deploying commands in a guild */
     private deployOptions?: CommandHandlerDeployOptions
 
     /**
@@ -59,6 +64,8 @@ export class CommandHandler {
 
     /**
      * Deploys commands in a guild. If setPermsOnDeploy is true, deploying will also set command permissions.
+     * 
+     * This method is used during deploying with message commands within Discord
      * @param guild Guild to deploy commands in
      */
     deployCommands(guild: Guild) {
@@ -71,7 +78,7 @@ export class CommandHandler {
     }
 
     /**
-     * Recursively searches a directory for TypeScript files with a Command instance as their default export, then registers the commands and their components
+     * Recursively searches a directory for files with a Command instance as their default export, then registers the commands and their components
      * @param dir Relative path to the command directory
      */
     async registerCommandsDir(dir: string) {
@@ -85,7 +92,7 @@ export class CommandHandler {
 
     /**
      * Registers a Command and all of it's components
-     * @param command Command instance to be registered
+     * @param command Command instance to be registered, it's components are automatically registered
      */
     registerCommand(command: Command) {
         this.commandRegister.set(command.name, command);
@@ -152,6 +159,11 @@ export class CommandHandler {
         }))
     }
 
+    /** 
+     * Listens to the Client's interaction events and handles registered functions.
+     * 
+     * Also listens for message events for deploying commands within Discord
+     */
     private listen(client: Client) {
         client.on('messageCreate', (message) => {
             if (!this.deployOptions) return
