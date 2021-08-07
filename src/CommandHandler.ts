@@ -5,6 +5,7 @@ import { readdirSync } from 'fs'
 import { resolve } from 'path'
 import { ButtonRow, SelectMenuRow } from "./ActionRow"
 
+/** Guides the construction of an object containing all of the metadata required to create a CommandHandler */
 export interface CommandHandlerOptions {
     /** Client for listening to interaction events */
     client: Client
@@ -18,6 +19,7 @@ export interface CommandHandlerOptions {
     commandsPath?: string
 }
 
+/** Guides the construction of an object containing all of the optional metadata for command deploying */
 export interface CommandHandlerDeployOptions {
     /** User Id(s) which specify who can use the deploy command */
     allowedUserIds?: `${bigint}` | `${bigint}`[]

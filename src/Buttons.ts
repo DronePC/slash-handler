@@ -1,5 +1,6 @@
 import { ButtonInteraction, EmojiIdentifierResolvable, InteractionButtonOptions, MessageButton, MessageButtonStyleResolvable, LinkButtonOptions as ButtonLinkOptions } from "discord.js"
 
+/** Guides the construction of an object containing all of the metadata required to create a FunctionButton */
 export interface FunctionButtonOptions extends InteractionButtonOptions {
     /** Defines a button's color and function */
     style: "PRIMARY" | "SECONDARY" | "SUCCESS" | "DANGER"
@@ -13,14 +14,17 @@ export interface FunctionButtonOptions extends InteractionButtonOptions {
     run: (interaction: ButtonInteraction) => Promise<void> | void
 }
 
+/** Appends the requirement for a label to FunctionButtonOptions */
 export interface FunctionButtonOptionsLabel extends FunctionButtonOptions {
     label: string
 }
 
+/** Appends the requirement for an emoji to FunctionButtonOptions */
 export interface FunctionButtonOptionsEmoji extends FunctionButtonOptions {
     emoji: EmojiIdentifierResolvable
 }
 
+/** Guides the construction of an object containing all of the metadata required to create a DisabledButton */
 export interface DisabledButtonOptions {
     /** Defines a button's color and function */
     style: MessageButtonStyleResolvable
@@ -30,14 +34,18 @@ export interface DisabledButtonOptions {
     emoji?: EmojiIdentifierResolvable
 }
 
+
+/** Appends the requirement for a label to DisabledButtonOptions */
 export interface DisabledButtonOptionsLabel extends DisabledButtonOptions {
     label: string
 }
 
+/** Appends the requirement for an emoji to DisabledButtonOptions */
 export interface DisabledButtonOptionsEmoji extends DisabledButtonOptions {
     emoji: EmojiIdentifierResolvable
 }
 
+/** Guides the construction of an object containing all of the metadata required to create a LinkButton */
 export interface LinkButtonOptions {
     /** URL of a link button. */
     url: string
@@ -47,10 +55,12 @@ export interface LinkButtonOptions {
     emoji?: EmojiIdentifierResolvable
 }
 
+/** Appends the requirement for a label to LinkButtonOptions */
 export interface LinkButtonOptionsLabel extends LinkButtonOptions {
     label: string
 }
 
+/** Appends the requirement for an emoji to LinkButtonOptions */
 export interface LinkButtonOptionsEmoji extends LinkButtonOptions {
     emoji: EmojiIdentifierResolvable
 }
@@ -82,7 +92,10 @@ export class FunctionButton implements Button {
     /** Internal function code execution variable */
     private execute: (interaction: ButtonInteraction) => Promise<void> | void
     
-    /** Button that executes code when clicked */
+    /** 
+     * Button that executes code when clicked 
+     * @param options Base FunctionButtonOptions with added requirements for one of label and emoji, or both
+     */
     constructor(options: FunctionButtonOptionsLabel | FunctionButtonOptionsEmoji) {
         this.style = options.style
         this.customId = options.customId.toLowerCase()
@@ -114,7 +127,10 @@ export class DisabledButton implements Button {
     customId?: string
     url?: string
 
-    /** Button that cannot be clicked */
+    /** 
+     * Button that cannot be clicked 
+     * @param options Base DisabledButtonOptions with added requirements for one of label and emoji, or both
+     */
     constructor(options: DisabledButtonOptionsLabel | DisabledButtonOptionsEmoji) {
         this.style = options.style
         this.disabled = true
@@ -133,7 +149,10 @@ export class LinkButton implements Button {
     label?: string
     emoji?: EmojiIdentifierResolvable
 
-    /** Button that leads to a URL when clicked */
+    /** 
+     * Button that leads to a URL when clicked 
+     * @param options Base LinkButtonOptions with added requirements for one of label and emoji, or both
+     */
     constructor(options: LinkButtonOptionsLabel | LinkButtonOptionsEmoji) {
         this.style = "LINK"
         this.url = options.url

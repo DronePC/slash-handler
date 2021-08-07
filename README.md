@@ -25,6 +25,8 @@ npm i discord.js "path/to/slash-handler-0.4.x.tgz"
 
 ### Basic command handling
 
+*TypeScript is recommended for using this package, but you can continue with base JavaScript.*
+
 To start using the command handler, you must create a `CommandHandler` class, and register a `Command` class to it.
 
 ```typescript

@@ -2714,6 +2714,9 @@ img {
 					<a href="Command.html#constructor" class="tsd-kind-icon">constructor</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a href="Command.html#commandOptions" class="tsd-kind-icon">command<wbr>Options</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a href="Command.html#components" class="tsd-kind-icon">components</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class">
@@ -2732,9 +2735,6 @@ img {
 					<a href="Command.html#name" class="tsd-kind-icon">name</a>
 				</li>
 				<li class=" tsd-kind-property tsd-parent-kind-class">
-					<a href="Command.html#options" class="tsd-kind-icon">options</a>
-				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-class">
 					<a href="Command.html#permissions" class="tsd-kind-icon">permissions</a>
 				</li>
 				<li class=" tsd-kind-get-signature tsd-parent-kind-class">
@@ -2745,6 +2745,9 @@ img {
 				</li>
 				<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 					<a href="Command.html#messageComponents" class="tsd-kind-icon">message<wbr>Components</a>
+				</li>
+				<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+					<a href="Command.html#options" class="tsd-kind-icon">options</a>
 				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
 					<a href="Command.html#run" class="tsd-kind-icon">run</a>
@@ -2822,6 +2825,11 @@ img {
 			<ul class="tsd-type-parameters">
 				<li>
 					<h4>InGroup<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span> = <span class="tsd-signature-type">false</span></h4>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Implicit nesting param. If true, the class is considered a sub-command</p>
+						</div>
+					</div>
 				</li>
 			</ul>
 		</section>
@@ -2851,13 +2859,13 @@ img {
 					<section class="tsd-index-section ">
 						<h3>Properties</h3>
 						<ul class="tsd-index-list">
+							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="Command.html#commandOptions" class="tsd-kind-icon">command<wbr>Options</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="Command.html#components" class="tsd-kind-icon">components</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="Command.html#defaultPermission" class="tsd-kind-icon">default<wbr>Permission</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="Command.html#description" class="tsd-kind-icon">description</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="Command.html#execute" class="tsd-kind-icon">execute</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="Command.html#guildOnly" class="tsd-kind-icon">guild<wbr>Only</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="Command.html#name" class="tsd-kind-icon">name</a></li>
-							<li class="tsd-kind-property tsd-parent-kind-class"><a href="Command.html#options" class="tsd-kind-icon">options</a></li>
 							<li class="tsd-kind-property tsd-parent-kind-class"><a href="Command.html#permissions" class="tsd-kind-icon">permissions</a></li>
 						</ul>
 					</section>
@@ -2867,6 +2875,7 @@ img {
 							<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="Command.html#applicationCommand" class="tsd-kind-icon">application<wbr>Command</a></li>
 							<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="Command.html#commandComponents" class="tsd-kind-icon">command<wbr>Components</a></li>
 							<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="Command.html#messageComponents" class="tsd-kind-icon">message<wbr>Components</a></li>
+							<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="Command.html#options" class="tsd-kind-icon">options</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
@@ -2890,7 +2899,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/63ee1b2/src/Command.ts#L63">src/Command.ts:63</a></li>
+								<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/1c9518c/src/Command.ts#L78">src/Command.ts:78</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2919,12 +2928,27 @@ img {
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Properties</h2>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+				<a name="commandOptions" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagOptional">Optional</span> command<wbr>Options</h3>
+				<div class="tsd-signature tsd-kind-icon">command<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ApplicationCommandOptionData</span><span class="tsd-signature-symbol">[]</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/1c9518c/src/Command.ts#L61">src/Command.ts:61</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Options of the command. Cannot hold sub-commands, for that use CommandGroups</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 				<a name="components" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagOptional">Optional</span> components</h3>
 				<div class="tsd-signature tsd-kind-icon">components<span class="tsd-signature-symbol">:</span> <a href="../modules.html#LimitedArray5" class="tsd-signature-type" data-tsd-kind="Type alias">LimitedArray5</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/ActionRow.html" class="tsd-signature-type" data-tsd-kind="Interface">ActionRow</a><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/63ee1b2/src/Command.ts#L54">src/Command.ts:54</a></li>
+						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/1c9518c/src/Command.ts#L69">src/Command.ts:69</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2939,7 +2963,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">default<wbr>Permission<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">InGroup</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">undefined</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/63ee1b2/src/Command.ts#L50">src/Command.ts:50</a></li>
+						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/1c9518c/src/Command.ts#L65">src/Command.ts:65</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2954,7 +2978,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">description<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/63ee1b2/src/Command.ts#L44">src/Command.ts:44</a></li>
+						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/1c9518c/src/Command.ts#L59">src/Command.ts:59</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2969,7 +2993,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">execute<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>interaction<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CommandInteraction</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/63ee1b2/src/Command.ts#L56">src/Command.ts:56</a></li>
+						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/1c9518c/src/Command.ts#L71">src/Command.ts:71</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3010,7 +3034,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">guild<wbr>Only<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">InGroup</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">undefined</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/63ee1b2/src/Command.ts#L48">src/Command.ts:48</a></li>
+						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/1c9518c/src/Command.ts#L63">src/Command.ts:63</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3025,7 +3049,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/63ee1b2/src/Command.ts#L42">src/Command.ts:42</a></li>
+						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/1c9518c/src/Command.ts#L57">src/Command.ts:57</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3035,27 +3059,12 @@ img {
 				</div>
 			</section>
 			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-				<a name="options" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagOptional">Optional</span> options</h3>
-				<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ApplicationCommandOptionData</span><span class="tsd-signature-symbol">[]</span></div>
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/63ee1b2/src/Command.ts#L46">src/Command.ts:46</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Options of the command. Cannot hold sub-commands, for that use CommandGroups</p>
-					</div>
-				</div>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 				<a name="permissions" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagOptional">Optional</span> permissions</h3>
 				<div class="tsd-signature tsd-kind-icon">permissions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">InGroup</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">ApplicationCommandPermissionData</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">undefined</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/63ee1b2/src/Command.ts#L52">src/Command.ts:52</a></li>
+						<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/1c9518c/src/Command.ts#L67">src/Command.ts:67</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3077,7 +3086,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/63ee1b2/src/Command.ts#L93">src/Command.ts:93</a></li>
+								<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/1c9518c/src/Command.ts#L116">src/Command.ts:116</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3099,7 +3108,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/63ee1b2/src/Command.ts#L88">src/Command.ts:88</a></li>
+								<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/1c9518c/src/Command.ts#L103">src/Command.ts:103</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3122,7 +3131,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/63ee1b2/src/Command.ts#L80">src/Command.ts:80</a></li>
+								<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/1c9518c/src/Command.ts#L95">src/Command.ts:95</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3132,6 +3141,29 @@ img {
 						</div>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MessageActionRow</span><span class="tsd-signature-symbol">[]</span></h4>
 						<p>List of MessageActionRows, or an empty list if no components are present</p>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+				<a name="options" class="tsd-anchor"></a>
+				<h3>options</h3>
+				<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+					<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> options<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ApplicationCommandOptionData</span><span class="tsd-signature-symbol">[]</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/1c9518c/src/Command.ts#L111">src/Command.ts:111</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Gets the options of the command.</p>
+							</div>
+						</div>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ApplicationCommandOptionData</span><span class="tsd-signature-symbol">[]</span></h4>
+						<p>List of ApplicationCommandData, or an empty list if no options are present</p>
 					</li>
 				</ul>
 			</section>
@@ -3148,7 +3180,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/63ee1b2/src/Command.ts#L106">src/Command.ts:106</a></li>
+								<li>Defined in <a href="https://github.com/DronePC/slash-handler/blob/1c9518c/src/Command.ts#L129">src/Command.ts:129</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">

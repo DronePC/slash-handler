@@ -1,11 +1,21 @@
 import { ApplicationCommandData, ApplicationCommandOptionData, ApplicationCommandPermissionData, CommandInteraction } from "discord.js"
 import { ActionRow } from "./ActionRow"
 
-/** Read-only array with a maximum length of 25 entries */
+/** 
+ * Read-only array with a maximum length of 25 entries 
+ * @typeParam T - Type of entry the array will hold, will be coupled with undefined
+ */
 export type LimitedArray25<T> = readonly [T, T?, T?, T?, T?, T?, T?, T?, T?, T?, T?, T?, T?, T?, T?, T?, T?, T?, T?, T?, T? ,T?, T?, T?, T?]
-/** Read-only array with a maximum length of 5 entries */
+/** 
+ * Read-only array with a maximum length of 5 entries 
+ * @typeParam T - Type of entry the array will hold, will be coupled with undefined
+ */
 export type LimitedArray5<T>  = readonly [T, T?, T?, T?, T?]
 
+/**
+ * Guides the construction of an object containing all of the metadata required to create a Command
+ * @typeParam InGroup - Implicit nesting param. If true, some top-level command metadata will be omitted
+ */
 export interface CommandOptions<InGroup extends boolean> {
     /** Name and id of the command */
     name: string
@@ -25,6 +35,10 @@ export interface CommandOptions<InGroup extends boolean> {
     run: (interaction: CommandInteraction) => Promise<void> | void
 }
 
+/**
+ * Guides the construction of an object containing all of the metadata required to create a CommandGroup
+ * @typeParam InGroup - Implicit nesting param. If true, some top-level command metadata will be omitted
+ */
 export interface CommandGroupOptions<InGroup extends boolean> extends Omit<CommandOptions<InGroup>, "run" | "options"> {
     /** Code to run when the slash/sub command is used */
     run?: (interaction: CommandInteraction) => Promise<void> | void
@@ -36,6 +50,7 @@ export interface CommandGroupOptions<InGroup extends boolean> extends Omit<Comma
  * Represents a slash command with executable code, can also represent a sub-command to a CommandGroup
  * 
  * Can hold other components (buttons, select menus)
+ * @typeParam InGroup - Implicit nesting param. If true, the class is considered a sub-command
  */
 export class Command<InGroup extends boolean = false> {
     /** Name of the command */
@@ -43,7 +58,7 @@ export class Command<InGroup extends boolean = false> {
     /** Description of the command */
     description: string
     /** Options of the command. Cannot hold sub-commands, for that use CommandGroups */
-    options?: ApplicationCommandOptionData[]
+    private commandOptions?: ApplicationCommandOptionData[]
     /** Guild only flag of the command. Will be inherited from a CommandGroup */
     guildOnly?: InGroup extends false ? boolean : undefined
     /** Default permission of the command. If set to false, no-one can use the command by default. Will be inherited from a CommandGroup */
@@ -64,7 +79,7 @@ export class Command<InGroup extends boolean = false> {
         this.name = options.name.toLowerCase()
         this.description = options.description
         this.guildOnly = options.guildOnly
-        this.options = options.options?.filter((o): o is ApplicationCommandOptionData & { type: "STRING" | "INTEGER" | "BOOLEAN" | "USER" | "CHANNEL" | "ROLE" | "MENTIONABLE" | "NUMBER" } => {
+        this.commandOptions = options.options?.filter((o): o is ApplicationCommandOptionData & { type: "STRING" | "INTEGER" | "BOOLEAN" | "USER" | "CHANNEL" | "ROLE" | "MENTIONABLE" | "NUMBER" } => {
             if (o !== undefined) return true; else return false
         })
         this.defaultPermission = options.defaultPermission
@@ -89,6 +104,14 @@ export class Command<InGroup extends boolean = false> {
         return this.components?.concat().filter((c): c is ActionRow => {return c !== undefined}) || []
     }
 
+    /** 
+     * Gets the options of the command. 
+     * @returns List of ApplicationCommandData, or an empty list if no options are present
+     */
+    get options() {
+        return this.commandOptions || []
+    }
+
     /** Gets the application command data to be deployed as a slash command */
     get applicationCommand(): ApplicationCommandData {
         return {
@@ -109,11 +132,13 @@ export class Command<InGroup extends boolean = false> {
     }
 }
 
-/** Represents a slash command with sub-commands, or a nested sub-command group, can run code */
+/** 
+ * Represents a slash command with sub-commands, or a nested sub-command group, can run code 
+ * @typeParam InGroup - Implicit nesting param. If true, the class is considered a sub-command group
+ */
 export class CommandGroup<InGroup extends boolean = false> extends Command {
     /** Group of sub-commands and sub-command groups. Command groups can only be nested once */
     private group: InGroup extends false ? LimitedArray25<CommandGroup<true> | Command<true>> : LimitedArray25<Command<true>>
-
     /** Represents a slash command with sub-commands, or a sub-command group, can run code */
     constructor(options: CommandGroupOptions<InGroup>) {
         super({ name: options.name, description: options.description, run: options.run || (async () => {}), defaultPermission: options.defaultPermission, permissions: options.permissions })
@@ -129,6 +154,14 @@ export class CommandGroup<InGroup extends boolean = false> extends Command {
             }))
         })
         return components
+    }
+
+    /** 
+     * Inherited method from Command, returns empty list as CommandGroups do not have options
+     * @private
+     */
+    override get options() {
+        return []
     }
 
     override get applicationCommand(): ApplicationCommandData {
